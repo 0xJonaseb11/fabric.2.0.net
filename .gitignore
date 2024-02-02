@@ -1,0 +1,8 @@
+# compiler files
+out
+cache
+build
+artifacts
+
+# tests
+coverage

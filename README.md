@@ -93,6 +93,12 @@ python3 --version
 
 ```
 
+`Some docker images used`
+
+```sh
+curl -sSL https://bit.ly/2ysbOFE | bash -s
+```
+
 -------
 
 @Jaz-3-0

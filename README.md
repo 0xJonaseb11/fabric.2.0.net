@@ -99,6 +99,28 @@ python3 --version
 curl -sSL https://bit.ly/2ysbOFE | bash -s
 ```
 
+`Installation of hyperledger fabric`
+
+```sh
+
+# update apt packages
+sudo apt update
+sudo apt upgrade
+# create new user(fabric)
+sudo adduser fabric
+sudo usermod -aG sudo fabric
+su - fabric
+
+# Install overall prerequisites
+sudo apt-get update
+sudo apt-get install git curl docker.io docker-compose nodejs npm python
+
+# start && enable docker
+sudo usermod -a -G docker $USER
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+
 -------
 
 @Jaz-3-0

@@ -14,7 +14,7 @@
     },
     "dependencies": {
         "fabric-ca-client": "^2.2.19",
-        "fabric-network": "^2.2.19"
+        "fabric-network": "^2.2.20"
     },
     "devDependencies": {
         "eslint": "^7.20.0",

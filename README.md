@@ -17,7 +17,7 @@ Setting up a basic hyperledger fabric 2.0 network
 ```sh
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
-source ~/.bashrc || . ~/.bashrc || vim ~/.bashrc
+source ~/.bashrc || . ~/.bashrc || vim ~/.bashrc || pico ~/.bashrc
 ```
 
 **Installation**

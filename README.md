@@ -1,6 +1,4 @@
-_**Author: @Jaz-3-0**_
-
-# About
+# fabric.2.0.net
 
 Setting up a basic hyperledger fabric 2.0 network
 
@@ -20,7 +18,7 @@ export PATH=$PATH:$GOPATH/bin
 source ~/.bashrc || . ~/.bashrc || vim ~/.bashrc || pico ~/.bashrc
 ```
 
-**Installation**
+_**Installation**_
 
 `Docker Engine`
 
@@ -120,6 +118,50 @@ sudo usermod -a -G docker $USER
 sudo systemctl start docker
 sudo systemctl enable docker
 ```
+
+`Dealing with platform specific binaries`
+
+```sh
+# Make sre you have a latest curl version
+# Install it with this command
+wget https://github.com/hyperledger/fabric/blob/master/scripts/bootstrap.sh
+
+# Note: You can use this command for any published version of Hyperledger Fabric. Simply replace ‘1.1.0’ with the version identiﬁer of the version you wish to install
+
+# Execute this in the very exact directory
+
+curl -sSL https://goo.gl/6wtTN5 | bash -s <fabric> <fabric-ca> <thirdparty>
+curl -sSL https://goo.gl/6wtTN5 | bash -s 1.1.0 1.1.0 0.4.6
+```
+
+`Binaries downloaded are`
+
+- cryptogen,
+- configtxgen,
+- configtxlator,
+- peer
+- orderer and
+- fabric-ca-client
+
+`You may want to add that to your PATH`
+
+```sh
+export PATH=<path to download location>/bin:$PATH
+```
+
+### `Hyperledger fabric sdks`
+
+- [Hyperledger fabric Node SDK](https://github.com/hyperledger/fabric-sdk-node) and [Node SDK Documentation](https://fabric-sdk-node.github.io)
+- [Hyperledger fabric Java SDK](https://github.com/hyperledger/fabric-sdk-node)
+- [Hyperledger fabric Python SDK](https://github.com/hyperledger/fabric-sdk-py)
+- [Hyperledger fabric Go SDK](https://github.com/hyperledger/fabric-sdk-go)
+- [Hyperledger fabric REST SDK](https://github.com/hyperledger/fabric-sdk-rest)
+
+### `Note`
+
+Hyperledger fabric also offers CA - Certificate of Authoriry for the network to manage and configure identity on your blockchain network
+[Hyperledger fabrc CA service](http://hyperledger-fabric-ca.readthedocs.io/en/latest)
+
 
 -------
 

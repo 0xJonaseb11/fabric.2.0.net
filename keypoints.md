@@ -1,4 +1,4 @@
-# `Key points`
+# `Key concepts`
 
 Hyperledger network doesn't need these public consensus mechanisms, instead uses what is called Membership Service Provider(MSP) to bring an agreement and validation to the network.
 
@@ -112,4 +112,25 @@ A Public Key Infrastructure is a collection of internet technologies that provid
   ![Root, Intermediate CAs and chain of trust illustration](assets/rca-ica-trust.png)
   _Note that a chain of trust is established between a Root CA and a set of intemediate CAs as long as the issuing CA for the certificate of each of these intermediate CAs is either the Root CA itself or has a chain of trust to the root CA_
 
-- Certificate Revocation List
+  `Fabric CA`
+
+  This is a built-in Root CA provided by fabric to help you build CAs in the blockchain network you form. It is a private CA provider that is capable of managing digital identities of fabric participants that have the form X.509 certificates. Since it customly targets the Root CA needs of fabric, it is inherently not capable of providing SSL certificates general/automatic use in browsers.
+
+- Certificate Revocation List(CRL)
+  
+  - A Certification Revocation List is a list of references to certificates that a CA knows to be revoked for one reason of another.
+  When a third party wants to verify another party's identity, it first checks the issuing CA's CRL to make sure that the certificate has not been revoked. A verifier doesn't have to check the CRL, but if they don't; they run the risk of accepting a compromised identity.
+  ![Certificate Revocation List illustration](assets/crl.png)
+  If an impersonate tries to pass a compromised digital certificate to a validating party, it can first be checked against the issuing CA's CRL to make sure it's not listed as no longer valid.
+  Please note that a certificate being revoked is totally different from certificate expiring. For more information about CRLs click [here](https://hyperledger-fabric-ca.readthedocs.io/en/latest/users-guide.html#generating-a-crl-certificate-revocation-list)
+
+## `Membership`
+
+How can the identities be used to represent the trusted members on the blockchain network??
+Here comes into play the Membership Service Provider(MSP). This identifies which Root CA and intermediate CAs that are trusted to define the members of a trusted domain. eg by listing the identities of the members of by identifying which CAs are authorized to issue valid identities for their members of both.
+The power of MSP goes beyond and can also be used to determine he roles of organisation members and also defining the access previleges in the context of network or channels. (eg.., channel admins, readers, writers, etc)
+The configuration of channel MSP, it is advertised to all the channels where members of the corresponding organisation participate.
+
+ _Note that in addition to channel MSP, peers, orderers and clients aslo maintain a local MSP to authenticate the member messages outside the context of a channel and to define the permisions over a particular component.(who has the ability to install chaincode on a peer._
+
+`Mapping MSPs to Organisations`

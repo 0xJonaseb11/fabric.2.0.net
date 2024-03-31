@@ -108,8 +108,8 @@ A Public Key Infrastructure is a collection of internet technologies that provid
   ![CA Working criteria](assets/CA.png)
 
   `Root CAs, Intermediate CAs and Chains of Trust`
-  Root CAs have to securely distribute hundreds of millions of certificates to internet users. It makes sense to spread this process out across what are called - _Intermediate CAs_. These Intermediate CAs have their own certificates issued byt the root CA or another intermediate authority, allowing the establishment of 'chain of trust' for any certificate that is issued by any CA in the chain. Not the is an intermediate CA  is compromised, on the other hand, there will be a much smaller exposure.
-  ![Root, Intermediate CAs and chain of trust illustration](assets/rca-ica-trust.png)
+   Root CAs have to securely distribute hundreds of millions of certificates to internet users. It makes sense to spread this process out across what are called - _Intermediate CAs_. These Intermediate CAs have their own certificates issued byt the root CA or another intermediate authority, allowing the establishment of 'chain of trust' for any certificate that is issued by any CA in the chain. Not the is an intermediate CA  is compromised, on the other hand, there will be a much smaller exposure.
+  - ![Root, Intermediate CAs and chain of trust illustration](assets/rca-ica-trust.png)
   _Note that a chain of trust is established between a Root CA and a set of intemediate CAs as long as the issuing CA for the certificate of each of these intermediate CAs is either the Root CA itself or has a chain of trust to the root CA_
 
   `Fabric CA`
@@ -134,3 +134,26 @@ The configuration of channel MSP, it is advertised to all the channels where mem
  _Note that in addition to channel MSP, peers, orderers and clients aslo maintain a local MSP to authenticate the member messages outside the context of a channel and to define the permisions over a particular component.(who has the ability to install chaincode on a peer._
 
 `Mapping MSPs to Organisations`
+
+Organisations(orgs) are important in such a way that they manage their members in a single MSP. They have a naming convention of (e.g., org1-MSP). With multiple memberships, it is easy with (e.g., org1-MSP-NATIONAL, org2-MSP-GOVERNMENT).
+![Mapping MSPs To Organisations](assets/orgs-msps.png)
+
+`Organisational Units(OUs)`
+
+An organisation is often divided into multiple organisational units(OUs), each which has a certain set of responsibilities. Forexample, the ORG1 might have both 'ORG1-MANUFACTURING' and 'ORG1-DISTRIBUTION' OUs to reflect these separate lines of business. Whne a CA issues a X.509 certificate, the OU field in the certificate specifies the line of business to which the identity belongs. OUs can also be helpful when it comes to the controlling of the parts of an organisation who are members of the blockchain network.
+
+![Organisational Units](assets/ous.png)
+
+`Local and Channel MSPs`
+MSPs appear in two places in a blockchain network: channel configuration(channel MSPs) and locally on actor's premise(local MSPs). _Note that the `Local Msps` are defined for clients(users) and for nodes(peers and orderers)_
+
+_**`Every node and user must have a local MSP defined` since it defines who have the participatory rights at that level(peer admins will not necessarily be the channel admins and vice versa)**_
+
+In contrast to local MSPs, `channel MSPs define the administrative and participatory rights at the channel level`. Once there is any mismatch in authentication in the channel, the transactions and other activities are immediately rejected.
+
+The key difference between local and channel MSPs is not hoe they function -- both turn identities into roles -- but their scope
+![Local and channel MSPs illustration](assets/L-C-msps.png)
+
+_**Note that `Local MSPs` `are only defined on the file system of the node or user to which they apply`. Therefore, physically and logically there is only one local MSP per node or user. However, as channel MSPs are available to all the nodes in the channel, they are logically defined once in the channel configuration. `However, a channel MSP is also instantiated on the file system of every node in the channel and kept synchronized via consensus`.**_
+
+`MSP Levels`

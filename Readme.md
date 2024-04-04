@@ -217,4 +217,17 @@ This folder contains that identity of the node. ie the cryptographic material th
 
 This folder is mandatory for local MSPs, and there must be exactly one X.509 for the node. It is not used by channel MSPs. _This is the certificate a peer places in a transaction proposal response, forexample to indicate that the peer indorsed it.
 
-_
+`KeyStore for Private keuys` --:
+This folder is defined for the local MSP of a peer or orderer node(or in a clients MSP), and contains the node `signing key`. This key matches cryptographically the node's identity inclued in node `identity` folder and is used to sign data -- for example to sign a transaction proposal response, as part of endorsement phase.
+_**This folder is mandatory and must contain exactly one private key. Obviously, the acess to folder to this folder must be limited only to the identities of the users who have the administrative responsibility on the peer.**_. Note that the configuration of a channel MSP doesnot include this folder, as channel MSPs solely aim to offer identity validation functionalities and not signing abilities.
+
+`TLS Root CA` --:
+This folder contains self-signed X.509 certificates of the Root CAs trusted by this organisation fot **TLS communication**. An example of a TLS communication would be when a peer needs to connect to an orderer so that it can it can receive ledger updates.
+_***MSP TLS information relates to the nodes inside the network -- the peers and the orderers, in other words, rather than the application and admistrations that consume the network.*_
+
+There shoulf be atleast one TLS Root CA X.509 certificate in this folder.
+
+`TLS Intermediate CA` --:
+This folder contains a list of intermediate CAs trusted by the organisation represented by this MSP for TLS communication. This folder is specifically useful when commercial CAs are used for TLS certificates of an organisation. Similar to membership CAs, specifying intermediate CAs is optional.
+
+## `Peers`

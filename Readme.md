@@ -31,7 +31,7 @@ To enable permissioned network, hyperledger fabric enables Membership Identity S
 
 Hyperledger fabric enables competing business interests and any groups that require private, confidential transactions to coexist on the same permissioned network through private network channels that ristrict access to specific channels to prevent acess to anauthorised transactions and other information.
 
-`Effiecient processing`
+`Efficient processing`
 
 Hyperledger fabric provides concurrency and parallelism to the network by assigning network roles by node type where transaction execution is separated from transaction ordering and commitment. This concurrency execution increases processing efficiency on each peer and accelerates delivery of transactions to the ordering service.
 
@@ -168,4 +168,53 @@ _**In this figure, the network configuration
 channel is administered by ORG1, but another application channel can be managed by ORG1 and ORG2. The peer
 is a member of and managed by ORG2, whereas ORG1 manages the orderer of the figure. ORG1 trusts identities
 from RCA1, whereas ORG2 trusts identities from RCA2. Note that these are administration identities, reflecting who
-can administer these components. So while ORG1 administers the network, ORG2.MSP does exist in the network**_
+can administer these components. So while ORG1 administers the network, ORG2.MSP does exist in the network.**_
+
+`Network MSP` The configuration of a network defines who are the members in the network — by defining the MSPs of the participant organizations — as well as which of these members are authorized to perform administrative tasks (e.g., creating a channel)
+
+`Channel MSP` It is important for a channel to maintain the MSPs of its members separately. A channel provides
+private communications between a particular set of organizations which in turn have administrative control over it
+
+`Peer MSP` This local MSP is defined on the file system of each peer and there is a single MSP instance for each peer. Conceptually, it performs exactly the same function as channel MSPs with the restriction that it only applies to the peer where it is defined
+
+`Orderer MSP` Like a peer MSP, an orderer local MSP is also defined on the file system of the node and only applies to that node. Like peer nodes, orderers are also owned by a single organization and therefore have a single MSP to list the actors or nodes it trusts.
+
+`MSP Structure`
+
+So far, you've seen that the most important element of an MSP is specification of the root or the Intermediate CAs that are used to establish an actor's or node's membership in the respective organisation. There are, however, more elements that are used in conjunction with these two to assist with membership functions.
+
+![MSP Structure illustration](assets/msp-structure.png)
+The figure above shows a local MSP is stored on a local file system. Even though channel MSPs are not physocally structured in that way, it's still a helpful way to think about them.
+
+Let's try to look together what the above folders/divisions really do --:
+
+`Root CAs` --:
+This folder contains  list of self-signed X.509 certificates of the root CAs trusted by the organisation represented by this MSP. Note that this is the most important folder because it identifies the CAs from which all other certificates must be derived to be considered members of the corresponding organisation.
+
+`Intermediate CAs` --:
+This folder contains a list of X.509 certificates of the Intermediate CAs trusted by this
+organization. Each certificate must be signed by one of the Root CAs in the MSP or by an Intermediate CA whose issuing CA chain ultimately leads back to a trusted Root CA.
+_**Notice, that it is possible to have a functioning network that does not have an Intermediate CA, in which case
+this folder would be empty.**_
+
+`Organisational Units, OUs` --:
+These are listed in the `$FABRIC_CFG_PATH/msp/config.yaml` file and contain a list of organisational units, whose members are considered to be part of the organisation represented by this MSP. This can be specified when you want to achieve high level of restriction of the members of an organisation to the ones having an identity with a specific OU in it.
+
+__**Note that specifying OUs is optional and if there is no Ous are listed, all the end identities that are part of  of an MSP -- as identified by the Root CAs and Intermediate folders -- will be considered members of the organisation.**_
+
+`Administrators` --:
+This folder contains a list of identities that define the actors who have the role of administrators for this organisation. Note that for a standard MSP type, there should be one or more X.509 certificates this list.
+
+![Administrators working](assets/admin.png)
+
+`Revoked Certificates` --:
+If the identity of an actor has been revoked, identifying information about the identity -- not the identity itself -- is held in this folder. For X.509-based identities, these identities are pair of strings known as Subject Key Identifier(SKI) or Authority Access Identifier(AKI), and are checked whenever the X.509 certificate is being used to make sure the certificate is not revoked. _This is conceptually the same as a CA's Certificate Revocation List(CRL), but it also related to revocation of membership from organisation_. As a result, the administrator of an MSP, local or channel, can quickly
+revoke a actor or node from an organization by advertising the updated CRL of the CA the revoked certificate
+as issued by. _This 'list of lists" is optional. It will only be populated when the certificates are revoked._
+
+`Node Identity` --:
+This folder contains that identity of the node. ie the cryptographic material that -- in combination of the content of the `keystore` -- would allow the node to autenticate itself in the messages that is sends to other participants of its channels and network.
+
+This folder is mandatory for local MSPs, and there must be exactly one X.509 for the node. It is not used by channel MSPs. _This is the certificate a peer places in a transaction proposal response, forexample to indicate that the peer indorsed it.
+
+_

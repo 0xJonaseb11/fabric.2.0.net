@@ -157,3 +157,15 @@ The key difference between local and channel MSPs is not hoe they function -- bo
 _**Note that `Local MSPs` `are only defined on the file system of the node or user to which they apply`. Therefore, physically and logically there is only one local MSP per node or user. However, as channel MSPs are available to all the nodes in the channel, they are logically defined once in the channel configuration. `However, a channel MSP is also instantiated on the file system of every node in the channel and kept synchronized via consensus`.**_
 
 `MSP Levels`
+
+It is important to keep in mind that the MSPs are at different levels with `MSPs at a higher level relating to network administration concerns` while `MSPs t lower level handle identity for the admistration of private resources`. Note also that MSPs are mandatory at each level of administration - they must be defined for the network, channel, peer, orderers and users. `orderer MSP` is also defined on the file system of the node and onlt applies to that node.
+
+Note that the MSPs for the peer and orderers are kep local whereas the MSPs for the channel(including network configuration) are shared across all the participants of the channel.
+
+![MSP Levels illustration](assets/msp-levels.png)
+
+_**In this figure, the network configuration
+channel is administered by ORG1, but another application channel can be managed by ORG1 and ORG2. The peer
+is a member of and managed by ORG2, whereas ORG1 manages the orderer of the figure. ORG1 trusts identities
+from RCA1, whereas ORG2 trusts identities from RCA2. Note that these are administration identities, reflecting who
+can administer these components. So while ORG1 administers the network, ORG2.MSP does exist in the network**_

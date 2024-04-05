@@ -6,3 +6,6 @@ artifacts
 
 # tests
 coverage
+
+# .env
+.env

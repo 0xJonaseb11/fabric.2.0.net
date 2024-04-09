@@ -231,3 +231,26 @@ There shoulf be atleast one TLS Root CA X.509 certificate in this folder.
 This folder contains a list of intermediate CAs trusted by the organisation represented by this MSP for TLS communication. This folder is specifically useful when commercial CAs are used for TLS certificates of an organisation. Similar to membership CAs, specifying intermediate CAs is optional.
 
 ## `Peers`
+
+A blockchain network is primarily comprised of a set of peer nodes. Peers are a fundamental element of the network
+because they host ledgers and smart contracts. _Smart contracts and ledgers are used to encapsulate the shared processes and shared information
+in a network, respectively._
+
+![Peers working illustration](assets/peers.png)
+A blockchain network is formed from peer nodes, each of which can hold copies of ledgers and copies of smart contracts.
+_In this example, the network N is formed by peers P1, P2 and P3. P1, P2 and P3 each maintain their own
+instance of the ledger L1. P1, P2 and P3 use chaincode S1 to access their copy of the ledger L1._
+**Note that peers can be created, started, stopped, reconfigured and also deleted. They expose a set of APIs that enable administrators and applications to interact with the services that they provide.**
+
+`Ledgers and chaincode`
+
+More accurately, the peer actually hosts `instances` of the ledger and `instances` of chaincode. This nature of peers provides redundancy in a fabric netwotk - no single point of failure. Not that there can be many ledgers and chaincodes hosted on a single peer.
+_Because a peer is a host for ledgers and chaincodes, applications and administrators must interact with a peer if they
+want to access these resources. That is why peers are regarded as most fundamental building blocks of a hyperledger fabric network._
+
+`Multiple ledgers`
+A peer is able to host more that one ledger, which is important because it allows a flexible system design. The simplest system design is to have a single peer - which is absolutely appropriate to host one or more ledgers if required.
+
+![Multiple ledgers](assets/mledgers.png)
+
+`Applications and Peers`

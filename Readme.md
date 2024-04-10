@@ -272,3 +272,30 @@ including P1. P1 validates the transaction before applying to L1. Once L1 is upd
 by A, to signify completion._
 
 `Peers and Channels`
+
+Although this topic is about peers rather than channels, it’s worth spending a little time understanding how peers inter-
+act with each other, and applications, via channels – a mechanism by which a set of components within a blockchain network can communicate and transact privately.
+_These components are typically peer nodes, orderer nodes and applications, and by joining a channel they agree to come together to collectively share and manage identical copies of the ledger of that channel._
+
+A real life example :-
+
+**Conceptually you can think of channels as being similar to groups of friends (though the members of a channel certainly don’t need to be friends!). A person might have several groups of friends, with each group having activities they do together. These
+groups might be totally separate (a group of work friends as compared to a group of hobby friends), or there can be crossover between them. Nevertheless each group is its own entity, with “rules” of a kind.**
+
+![Peers and channels illustration](assets/p-ch.png)
+_Channels allow a specific set of peers and applications to communicate with each other within a blockchain network.
+In this example, application A can communicate directly with peers P1 and P2 using channel C. You can think of the channel as a pathway for communications between particular applications and peers. (For simplicity, orderers are not shown in this diagram, but must be present in a functioning network.)
+_
+As you can see, peers don't exist the same way as channels do - it's appropriate to think of a channel as a logical structure that is formed by a collection of physical peers. It is vital understand this point  - **peers provide the control point for access to and management of channels.**
+
+`Peers and organizations`
+
+Blockchain networks are administered by a collection of organisations rather than a single organisation. Peers are central to how this kind of distributed network is built because they are owned by - and are the connection points to the network for these organizations.
+
+![Peers and organizations illustration](assets/p-orgs.png)
+
+_Peers in a blockchain network with multiple organizations. The blockchain network is built up from the peers owned and contributed by the different organizations. In this example, we see four organizations contributing eight peers to
+form a network. The channel C connects five of these peers in the network N – P1, P3, P5, P7 and P8. The other peers owned by these organizations have not been joined to this channel, but are typically joined to at least one other channel. Applications that have been developed by a particular organization will connect to their own organization’s peers as well as those of different organizations. Again, for simplicity, an orderer node is not shown in this diagram._
+
+Note that Applications either connect to peers in their organization, or peers in another organization, depending on the nature of the ledger interaction that’s required. For ledger-query interactions, applications typically connect to their own organization’s peers. For ledger-update interactions, we’ll see later why applications need to connect to peers in every organization that is required to endorse the ledger update.
+

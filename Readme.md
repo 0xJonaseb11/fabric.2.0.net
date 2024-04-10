@@ -299,3 +299,21 @@ form a network. The channel C connects five of these peers in the network N – 
 
 Note that Applications either connect to peers in their organization, or peers in another organization, depending on the nature of the ledger interaction that’s required. For ledger-query interactions, applications typically connect to their own organization’s peers. For ledger-update interactions, we’ll see later why applications need to connect to peers in every organization that is required to endorse the ledger update.
 
+`Peers and Identity`
+
+Let's try to understand how peers get assigned to organizations by their administrators. As seen in above topics, peers have an identity assigned to them via a digital certificate from a particular certificate authority. So, each and every peer in the network is assigned a digital certificate by an administrator from its owning organization.
+
+![Peers and Identity illustration](assets/p-id.png)
+
+_When a peer connects to a channel, its digital certificate identifies its owning organization via a channel MSP. In this example, P1 and P2 have identities issued by CA1. Channel C determines from a policy in its channel configuration that identities from CA1 should be associated with Org1 using ORG1.MSP. Similarly, P3 and P4 are identified by ORG2.MSP as being part of Org2._
+
+**Moreover, a peer can only be owned by a single organization, and is therefore associated with a single MSP.**
+
+And to digress for a moment, peers as well as everything that interacts with a blockchain network acquire their organizational identity from their digital certificate and an MSP. Peers, applications, end users, administrators, orderers must have an identity and an associated MSP if they want to interact with a blockchain network. We give a name to every entity that interacts with a blockchain network using an identity – a principal. You can learn lots more about principals
+and organizations elsewhere in this guide, but for now you know more than enough to continue your understanding of peers!
+
+Finally, note that it’s not really important where the peer is physically located – it could reside in the cloud, or in a data centre owned by one of the organizations, or on a local machine – it’s the identity associated with it that identifies it as owned by a particular organization. In our example above, P3 could be hosted in Org1’s data center, but as long as the digital certificate associated with it is issued by CA2, then it’s owned by Org2.
+
+`Peers and Orderers`
+
+

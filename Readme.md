@@ -254,3 +254,21 @@ A peer is able to host more that one ledger, which is important because it allow
 ![Multiple ledgers](assets/mledgers.png)
 
 `Applications and Peers`
+
+Applications always need to connect to peers to access ledgers and chaincodes. That is made possible through Hyperledger Fabric Software Development Kit(SDK) for programmers - its APIs enable applications to connect to peers, invoke chaincodes to generate transactions, submit transactions to the network that will get ordered and committed to the distributed ledger, and receive events when this process is completed.
+Note that through peer connection, applications can execute chaincodes to query and update the ledger.
+
+The result of a ledger query transaction is returned immediately, whereas ledger updates involve a more complex interaction between appli-
+cations, peers, and orderers.
+
+![Applications and peers illustration](assets/app-peers.png)
+
+_Peers, in conjunction with orderers, ensure that the ledger is kept up-to-date on every peer. In this example application
+A connects to P1 and invokes chaincode S1 to query or update the ledger L1. P1 invokes S1 to generate a proposal
+response that contains a query result or a proposed ledger update. Application A receives the proposal response, and
+for queries the process is now complete. For updates, A builds a transaction from the all the responses, which it sends
+it to O1 for ordering. O1 collects transactions from across the network into blocks, and distributes these to all peers,
+including P1. P1 validates the transaction before applying to L1. Once L1 is updated, P1 generates an event, received
+by A, to signify completion._
+
+`Peers and Channels`

@@ -164,16 +164,12 @@ Note that the MSPs for the peer and orderers are kep local whereas the MSPs for 
 
 ![MSP Levels illustration](assets/msp-levels.png)
 
-_**In this figure, the network configuration
-channel is administered by ORG1, but another application channel can be managed by ORG1 and ORG2. The peer
-is a member of and managed by ORG2, whereas ORG1 manages the orderer of the figure. ORG1 trusts identities
-from RCA1, whereas ORG2 trusts identities from RCA2. Note that these are administration identities, reflecting who
-can administer these components. So while ORG1 administers the network, ORG2.MSP does exist in the network.**_
+_**In this figure, the network configuration channel is administered by ORG1, but another application channel can be managed by ORG1 and ORG2. The peer is a member of and managed by ORG2, whereas ORG1 manages the orderer of the figure. ORG1 trusts identities from RCA1, whereas ORG2 trusts identities from RCA2. Note that these are administration identities, reflecting who can administer these components. So while ORG1 administers the network, ORG2.MSP does exist in the network.**_
 
 `Network MSP` The configuration of a network defines who are the members in the network — by defining the MSPs of the participant organizations — as well as which of these members are authorized to perform administrative tasks (e.g., creating a channel)
 
 `Channel MSP` It is important for a channel to maintain the MSPs of its members separately. A channel provides
-private communications between a particular set of organizations which in turn have administrative control over it
+private communications between a particular set of organizations which in turn have administrative control over it.
 
 `Peer MSP` This local MSP is defined on the file system of each peer and there is a single MSP instance for each peer. Conceptually, it performs exactly the same function as channel MSPs with the restriction that it only applies to the peer where it is defined
 
@@ -194,8 +190,7 @@ This folder contains  list of self-signed X.509 certificates of the root CAs tru
 `Intermediate CAs` --:
 This folder contains a list of X.509 certificates of the Intermediate CAs trusted by this
 organization. Each certificate must be signed by one of the Root CAs in the MSP or by an Intermediate CA whose issuing CA chain ultimately leads back to a trusted Root CA.
-_**Notice, that it is possible to have a functioning network that does not have an Intermediate CA, in which case
-this folder would be empty.**_
+_**Notice, that it is possible to have a functioning network that does not have an Intermediate CA, in which case this folder would be empty.**_
 
 `Organisational Units, OUs` --:
 These are listed in the `$FABRIC_CFG_PATH/msp/config.yaml` file and contain a list of organisational units, whose members are considered to be part of the organisation represented by this MSP. This can be specified when you want to achieve high level of restriction of the members of an organisation to the ones having an identity with a specific OU in it.
@@ -232,14 +227,12 @@ This folder contains a list of intermediate CAs trusted by the organisation repr
 
 ## `Peers`
 
-A blockchain network is primarily comprised of a set of peer nodes. Peers are a fundamental element of the network
-because they host ledgers and smart contracts. _Smart contracts and ledgers are used to encapsulate the shared processes and shared information
-in a network, respectively._
+A blockchain network is primarily comprised of a set of peer nodes. Peers are a fundamental element of the network because they host ledgers and smart contracts. 
+_Smart contracts and ledgers are used to encapsulate the shared processes and shared information in a network, respectively._
 
 ![Peers working illustration](assets/peers.png)
 A blockchain network is formed from peer nodes, each of which can hold copies of ledgers and copies of smart contracts.
-_In this example, the network N is formed by peers P1, P2 and P3. P1, P2 and P3 each maintain their own
-instance of the ledger L1. P1, P2 and P3 use chaincode S1 to access their copy of the ledger L1._
+_In this example, the network N is formed by peers P1, P2 and P3. P1, P2 and P3 each maintain their own instance of the ledger L1. P1, P2 and P3 use chaincode S1 to access their copy of the ledger L1._
 **Note that peers can be created, started, stopped, reconfigured and also deleted. They expose a set of APIs that enable administrators and applications to interact with the services that they provide.**
 
 `Ledgers and chaincode`
@@ -258,18 +251,11 @@ A peer is able to host more that one ledger, which is important because it allow
 Applications always need to connect to peers to access ledgers and chaincodes. That is made possible through Hyperledger Fabric Software Development Kit(SDK) for programmers - its APIs enable applications to connect to peers, invoke chaincodes to generate transactions, submit transactions to the network that will get ordered and committed to the distributed ledger, and receive events when this process is completed.
 Note that through peer connection, applications can execute chaincodes to query and update the ledger.
 
-The result of a ledger query transaction is returned immediately, whereas ledger updates involve a more complex interaction between appli-
-cations, peers, and orderers.
+The result of a ledger query transaction is returned immediately, whereas ledger updates involve a more complex interaction between applications, peers, and orderers.
 
 ![Applications and peers illustration](assets/app-peers.png)
 
-_Peers, in conjunction with orderers, ensure that the ledger is kept up-to-date on every peer. In this example application
-A connects to P1 and invokes chaincode S1 to query or update the ledger L1. P1 invokes S1 to generate a proposal
-response that contains a query result or a proposed ledger update. Application A receives the proposal response, and
-for queries the process is now complete. For updates, A builds a transaction from the all the responses, which it sends
-it to O1 for ordering. O1 collects transactions from across the network into blocks, and distributes these to all peers,
-including P1. P1 validates the transaction before applying to L1. Once L1 is updated, P1 generates an event, received
-by A, to signify completion._
+_Peers, in conjunction with orderers, ensure that the ledger is kept up-to-date on every peer. In this example application A connects to P1 and invokes chaincode S1 to query or update the ledger L1. P1 invokes S1 to generate a proposal response that contains a query result or a proposed ledger update. Application A receives the proposal response, and for queries the process is now complete. For updates, A builds a transaction from the all the responses, which it sends it to O1 for ordering. O1 collects transactions from across the network into blocks, and distributes these to all peers, including P1. P1 validates the transaction before applying to L1. Once L1 is updated, P1 generates an event, received by A, to signify completion._
 
 `Peers and Channels`
 
@@ -294,8 +280,7 @@ Blockchain networks are administered by a collection of organisations rather tha
 
 ![Peers and organizations illustration](assets/p-orgs.png)
 
-_Peers in a blockchain network with multiple organizations. The blockchain network is built up from the peers owned and contributed by the different organizations. In this example, we see four organizations contributing eight peers to
-form a network. The channel C connects five of these peers in the network N – P1, P3, P5, P7 and P8. The other peers owned by these organizations have not been joined to this channel, but are typically joined to at least one other channel. Applications that have been developed by a particular organization will connect to their own organization’s peers as well as those of different organizations. Again, for simplicity, an orderer node is not shown in this diagram._
+_Peers in a blockchain network with multiple organizations. The blockchain network is built up from the peers owned and contributed by the different organizations. In this example, we see four organizations contributing eight peers to form a network. The channel C connects five of these peers in the network N – P1, P3, P5, P7 and P8. The other peers owned by these organizations have not been joined to this channel, but are typically joined to at least one other channel. Applications that have been developed by a particular organization will connect to their own organization’s peers as well as those of different organizations. Again, for simplicity, an orderer node is not shown in this diagram._
 
 Note that Applications either connect to peers in their organization, or peers in another organization, depending on the nature of the ledger interaction that’s required. For ledger-query interactions, applications typically connect to their own organization’s peers. For ledger-update interactions, we’ll see later why applications need to connect to peers in every organization that is required to endorse the ledger update.
 
@@ -316,4 +301,32 @@ Finally, note that it’s not really important where the peer is physically loca
 
 `Peers and Orderers`
 
+An update transaction is quite different to a query transaction because a single peer cannot, on its own, update the ledger – it requires the consent of other peers in the network. A peer requires other peers in the network to approve a ledger update before it can be applied to a peer’s local ledger. This process is called consensus – and takes much longer to complete than a query. But when all the peers required to approve the transaction do so, and the transaction is committed to the ledger, peers will notify their connected applications that the ledger has been updated. You’re about to be shown a lot more detail about how peers and orderers manage the consensus process in this section.
 
+_Specifically, applications that want to update the ledger are involved in a 3-phase process, which ensures that all the peers in a blockchain network keep their ledgers consistent with each other. In the first phase, applications work with a subset of endorsing peers, each of which provide an endorsement of the proposed ledger update to the application, but do not apply the proposed update to their copy of the ledger. In the second phase, these separate endorsements are collected together as transactions and packaged into blocks. In the final phase, these blocks are distributed back to every peer where each transaction is validated before being applied to that peer’s copy of the ledger._
+
+`Phase 1 : Proposal`
+Phase 1 of the transaction workflow involves an interaction between an application and a set of peers – it does notinvolve orderers. Phase 1 is only concerned with an application asking different organizations’ endorsing peers to agree to the results of the proposed chaincode invocation. 
+To start phase 1, applications generate a transaction proposal which they send to each of the required set of peers for endorsement. Each peer then independently executes a chaincode using the transaction proposal to generate a transaction proposal response. It does not apply this update to the ledger, but rather the peer signs it and returns to the
+application. Once the application has received a sufficient number of signed proposal responses, the first phase of the transaction flow is complete. Let’s examine this phase in a little more detail.
+
+![Phase 1 - Proposal - Peers and Orderers](assets/phase1.png)
+_Transaction proposals are independently executed by peers who return endorsed proposal responses. In this example, application A1 generates transaction T1 proposal P which it sends to both peer P1 and peer P2 on channel C. P1 executes S1 using transaction T1 proposal P generating transaction T1 response R1 which it endorses with E1. Independently, P2 executes S1 using transaction T1 proposal P generating transaction T1 response R2 which it endorses with E2. Application A1 receives two endorsed responses for transaction T1, namely E1 and E2_
+
+![Working principal of phase 1 - proposal](assets/working-p.png)
+
+`Phase 2 : Packaging`
+The orderer is pivotal to this process – it receives
+transactions containing endorsed transaction proposal responses from many applications. It orders each transaction
+relative to other transactions, and packages batches of transactions into blocks ready for distribution back to all peers
+connected to the orderer, including the original endorsing peers.
+
+![Packaging phase illustration](assets/packaging.png)
+_The first role of an orderer node is to package proposed ledger updates. In this example, application A1 sends a transaction T1 endorsed by E1 and E2 to the orderer O1. In parallel, Application A2 sends transaction T2 endorsed by E1 to the orderer O1. O1 packages transaction T1 from application A1 and transaction T2 from application A2 together with other transactions from other applications in the network into block B2. We can see that in B2, the transaction order is T1,T2,T3,T4,T6,T5 – which may not be the order in which these transactions arrived at the orderernode! (This example shows a very simplified orderer configuration.)_
+
+**Note that the orderers are responsible for the simple but vital processes of collecting
+proposed transaction updates, ordering them, packaging them into blocks, ready for distribution - all transactions are marshalled into in a strict order – transactions are never dropped or de-prioritized.**
+
+Another thing to note is that - _the blocks generated by a collection of orderers are said to be final because once a transaction has been written to a block, its position in the ledger is immutably assured. Hyperledger Fabric’s finality means that a disastrous occurrence known as a ledger fork cannot occur._
+
+`Validation`

@@ -227,7 +227,7 @@ This folder contains a list of intermediate CAs trusted by the organisation repr
 
 ## `Peers`
 
-A blockchain network is primarily comprised of a set of peer nodes. Peers are a fundamental element of the network because they host ledgers and smart contracts. 
+A blockchain network is primarily comprised of a set of peer nodes. Peers are a fundamental element of the network because they host ledgers and smart contracts.
 _Smart contracts and ledgers are used to encapsulate the shared processes and shared information in a network, respectively._
 
 ![Peers working illustration](assets/peers.png)
@@ -306,7 +306,7 @@ An update transaction is quite different to a query transaction because a single
 _Specifically, applications that want to update the ledger are involved in a 3-phase process, which ensures that all the peers in a blockchain network keep their ledgers consistent with each other. In the first phase, applications work with a subset of endorsing peers, each of which provide an endorsement of the proposed ledger update to the application, but do not apply the proposed update to their copy of the ledger. In the second phase, these separate endorsements are collected together as transactions and packaged into blocks. In the final phase, these blocks are distributed back to every peer where each transaction is validated before being applied to that peer’s copy of the ledger._
 
 `Phase 1 : Proposal`
-Phase 1 of the transaction workflow involves an interaction between an application and a set of peers – it does notinvolve orderers. Phase 1 is only concerned with an application asking different organizations’ endorsing peers to agree to the results of the proposed chaincode invocation. 
+Phase 1 of the transaction workflow involves an interaction between an application and a set of peers – it does notinvolve orderers. Phase 1 is only concerned with an application asking different organizations’ endorsing peers to agree to the results of the proposed chaincode invocation.
 To start phase 1, applications generate a transaction proposal which they send to each of the required set of peers for endorsement. Each peer then independently executes a chaincode using the transaction proposal to generate a transaction proposal response. It does not apply this update to the ledger, but rather the peer signs it and returns to the
 application. Once the application has received a sufficient number of signed proposal responses, the first phase of the transaction flow is complete. Let’s examine this phase in a little more detail.
 

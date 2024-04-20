@@ -342,3 +342,15 @@ _The second role of an orderer node is to distribute blocks to peers. In this ex
 
 `Orderers and Consensus`
 
+This entire transaction workflow process is called consensus because all peers have reached agreement on the order and content of transactions, in a process that is mediated by orderers. Consensus is a multi-step process and applications are only notified of ledger updates when the process is complete – which may happen at slightly different times on
+different peers.
+
+## `Ledger`
+
+The ledger is the sequenced, tamper-resistant record of all state transitions. State transitions are a result of chaincode invocations (“transactions”) submitted by participating parties. Each transaction results in a set of asset key-value pairs that are committed to the ledger as creates, updates, or deletes.
+The ledger is comprised of a blockchain (‘chain’) to store the immutable, sequenced record in blocks, as well as a state database to maintain current state. There is one ledger per channel. Each peer maintains a copy of the ledger for each channel of which they are a member.
+
+## `Chain`
+
+The chain is a transaction log, structured as hash-linked blocks, where each block contains a sequence of N transactions. The block header includes a hash of the block’s transactions, as well as a hash of the prior block’s header. In this way, all transactions on the ledger are sequenced and cryptographically linked together. In other words, it is not possible to tamper with the ledger data, without breaking the hash links. The hash of the latest block represents every transaction that has come before, making it possible to ensure that all peers are in a consistent and trusted state.
+The chain is stored on the peer file system (either local or attached storage), efficiently supporting the append-only nature of the blockchain workload.

@@ -162,6 +162,50 @@ export PATH=<path to download location>/bin:$PATH
 Hyperledger fabric also offers CA - Certificate of Authoriry for the network to manage and configure identity on your blockchain network
 [Hyperledger fabrc CA service](http://hyperledger-fabric-ca.readthedocs.io/en/latest)
 
+## Getting started
+
+`Remove any containers or artifacts from recent runs`
+
+```sh
+cd fabric-samples/test-network
+./network.sh down
+```
+
+`Bring up the network`
+
+```sh
+./network.sh up
+# If ir is successfull, you shoulf see different components of the output
+
+## See the nodes and containers created by `./network.sh` script
+docker ps -a
+``
+
+**Getting error while bringing up network??**
+
+```sh
+./network.sh up
+Using docker and docker-compose
+Starting nodes with CLI timeout of '5' tries and CLI delay of '3' seconds and using database 'leveldb' with crypto from 'cryptogen'
+```
+
+[Follow the instructions in the Fabric docs to install the Fabric Binaries](https://hyperledger-fabric.readthedocs.io/en/latest/install.html)
+
+`Creating a new channel`
+
+```sh
+./network.sh createChannel -c <channel_name>
+```
+
+**NOTE: Make sure the name of the channel applies the following restrictions:**
+
+- contains only lower case ASCII alphanumerics, dots ‘.’, and dashes ‘-‘
+- is shorter than 250 characters
+- starts with a letter
+
+`Starting a chaincode on the channel`
+
+
 -------
 
-@Jaz-3-0
+@0xJonaseb11

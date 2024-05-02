@@ -205,6 +205,9 @@ Starting nodes with CLI timeout of '5' tries and CLI delay of '3' seconds and us
 
 `Starting a chaincode on the channel`
 
+```sh
+./network.sh deployCC -ccn basid -cpp ../asset-transfer-basic/chaincode-go -ccl go
+```
 
 -------
 

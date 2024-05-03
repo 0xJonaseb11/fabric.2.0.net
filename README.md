@@ -175,10 +175,24 @@ cd $HOME/go/src/github.com/<your_github_userid>
 curl -sSLO https://raw.githubusercontent.com/hyperledger/fabric/main/scripts/install-fabric.sh && chmod +x install-fabric.sh
 ```
 
+`Alternative script || advanced`
+
+```sh
+curl -sSL https://raw.githubusercontent.com/hyperledger/fabric/main/scripts/bootstrap.sh| bash -s
+```
+
 `Pull docker containers and clone samples`
 
 ```sh
 ./install-fabric.sh docker samples binary
+or
+./install-fabric.sh d s b
+```
+
+`Specify the version of binaries you want to install`
+
+```sh
+./install-fabric.sh --fabric-version <version> binary # in this case we used 2.5.0
 ```
 
 `Remove any containers or artifacts from recent runs`

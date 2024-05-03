@@ -299,6 +299,8 @@ peer, so each endorsing peer must be specified.)_
 
 ```sh
 peer chaincode query -C myChannel -n basic -c '{"Args": ["GetAllAssets]}'
+
+## If it is sucessful, you'll see a list of assets, their properties and respective owners
 ```
 
 `change the owner of an asset on the ledger by invoking the asset-transfer (basic)chaincode`

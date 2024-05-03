@@ -175,6 +175,11 @@ cd $HOME/go/src/github.com/<your_github_userid>
 curl -sSLO https://raw.githubusercontent.com/hyperledger/fabric/main/scripts/install-fabric.sh && chmod +x install-fabric.sh
 ```
 
+`Pull docker containers and clone samples`
+
+```sh
+./install-fabric.sh docker samples binary
+```
 
 `Remove any containers or artifacts from recent runs`
 

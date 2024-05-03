@@ -246,6 +246,55 @@ Starting nodes with CLI timeout of '5' tries and CLI delay of '3' seconds and us
 ./network.sh deployCC -ccn basid -cpp ../asset-transfer-basic/chaincode-go -ccl go
 ```
 
+`Using other languages not Go??`
+
+```sh
+./network.sh deployCC -ccn basic -ccp ../asset-transfer-basic/chaincode-<lang> -ccl <lang>
+# In this case - fabric -> Javascript, typescript or Java
+```
+
+**After bringing up the network, you cab use `peer`CLI to interact with the network**
+_**The peer CLI allows you to invoke deployed smart contracts, update channels, or install and deploy new smart contracts from the CLI.**_
+
+```sh
+# Add downloaded binaries to bin folder
+export PATH=${PWD}/../bin:$PATH
+```
+
+**Another essential step is to set the `FABRIC_CFG_PATH` to point to the `core.yaml` file in the fabric-samples directory**
+
+```sh
+export FABRIC_CFG_PATH=$PWD/../config/
+```
+
+`Set the environmental variables for Org1`
+
+```sh
+# Environment variables for Org1
+export CORE_PEER_TLS_ENABLED=true
+export CORE_PEER_LOCALMSPID="Org1MSP"
+export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+export CORE_PEER_ADDRESS=localhost:7051
+```
+
+_The CORE_PEER_TLS_ROOTCERT_FILE and CORE_PEER_MSPCONFIGPATH environment variables point to the Org1 crypto material in the organizations folder._
+
+`Initialize the ledger with assets`
+
+```sh
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n basic --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt" -c '{"function":"InitLedger","Args":[]}'
+```
+
+_*If successful, you should see output of similar look as this*_
+
+```sh
+INFO 001 Chaincode invoke successful. result: status:200
+```
+
+_(Note the CLI does not access the Fabric Gateway
+peer, so each endorsing peer must be specified.)_
+
 -------
 
 @0xJonaseb11

@@ -164,6 +164,18 @@ Hyperledger fabric also offers CA - Certificate of Authoriry for the network to 
 
 ## Getting started
 
+`Install fabric images and binaries`
+
+```sh
+mkdir -p $HOME/go/src/github.com/<your_github_userid>
+cd $HOME/go/src/github.com/<your_github_userid>
+
+# `Getting install script`
+
+curl -sSLO https://raw.githubusercontent.com/hyperledger/fabric/main/scripts/install-fabric.sh && chmod +x install-fabric.sh
+```
+
+
 `Remove any containers or artifacts from recent runs`
 
 ```sh

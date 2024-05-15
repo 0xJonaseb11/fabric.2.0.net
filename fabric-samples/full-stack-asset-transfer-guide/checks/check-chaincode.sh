@@ -14,7 +14,6 @@ function chaincode_ready() {
 }
 
 must_declare WORKSHOP_CRYPTO
-
 must_declare CORE_PEER_LOCALMSPID
 must_declare CORE_PEER_ADDRESS
 must_declare CORE_PEER_TLS_ENABLED
